@@ -4,7 +4,7 @@ o projeto depende do Poetry para seu gerenciamento e precisa ser devidamente ins
 
 Para instalar o poetry execute em ordem os comandos:
 ```
-pip install --user pipx
+pip install --user pipxhghhggh
 pipx install poetry
 poetry python install 3.13
 poetry env use 3.13
@@ -41,7 +41,7 @@ O body deve ser no formato json
 }
 ```
 
-E o usuario for autenticado corretamente a saida deve ser um json contendo dois tokens
+Se o usuario for autenticado corretamente a saida deve ser um json contendo dois tokens
 ```
 {
     "refresh": "TOKEN",
