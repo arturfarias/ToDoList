@@ -4,7 +4,7 @@ o projeto depende do Poetry para seu gerenciamento e precisa ser devidamente ins
 
 Para instalar o poetry execute em ordem os comandos:
 ```
-pip install --user pipxhghhggh
+pip install --user pipx
 pipx install poetry
 poetry python install 3.13
 poetry env use 3.13
