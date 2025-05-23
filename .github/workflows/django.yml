@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    name: Run Django CLI
     runs-on: ubuntu-latest
 
     steps:
