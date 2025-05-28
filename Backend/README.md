@@ -31,7 +31,7 @@ O projeto se utiliza da ferramenta task para criar scripts com os comandos funda
 
 
 ## Autenticação - JWT
-Para autenticar e obter os tokens de acesso e refresh, realizar uma requisição POST para  http://domain:8000/api/token/
+Para autenticar e obter os tokens de acesso e refresh, realizar uma requisição POST para  http://localhost:8000/api/token/
 
 O body deve ser no formato json
 ```
@@ -48,4 +48,16 @@ Se o usuario for autenticado corretamente a saida deve ser um json contendo dois
     "access": "TOKEN"
 }
 ```
+## Documentação
+- **`swagger`**  
+As rotas e os testes da API podem ser acessados via Swagger no link: http://localhost:8000/swagger/
+
+Para autenticação, use o botão Authorize e informe o token válido no formato abaixo:
+```
+Bearer SEU_TOKEN
+```
+
+- **`redoc`**  
+A página da documentação da API pode ser acessada via Redoc no link: http://localhost:8000/redoc/
+
 
