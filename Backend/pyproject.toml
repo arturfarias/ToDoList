@@ -18,6 +18,7 @@ dependencies = [
 ]
 
 [tool.poetry]
+name = "backend"
 package-mode = false
 
 [build-system]
