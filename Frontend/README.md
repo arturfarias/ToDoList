@@ -1,13 +1,11 @@
 ## Instalação e configuração do ambiente
-o projeto depende do Poetry para seu gerenciamento e precisa ser devidamente instalado e configurado.
 
-
-Para instalar o poetry execute em ordem os comandos:
+Para instalar as dependencias do expo execute o comando:
 ```
 npm install 
 ```
 
-Para ativar o ambiente:
+Para executar o o projeto via emulador:
 ```
 npm start
 ```
