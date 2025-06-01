@@ -1,5 +1,5 @@
-import Login from './screens/Login';
+import Navigation from "./rotes/Navigation";
 
 export default function App() {
-  return <Login />;
+  return <Navigation />;
 }
