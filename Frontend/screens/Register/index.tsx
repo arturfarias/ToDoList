@@ -6,33 +6,29 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import {Pages} from '../../rotes/Navigation';
 
-
 interface Props{
   navigation: StackNavigationProp<Pages>
 }
 
-const Login: React.FC<Props> = ({navigation}) => {
-  const [user, setUser] = React.useState<string>('');
+const Register: React.FC<Props> = ({navigation}) => {
+  const [username, setUsername] = React.useState<string>('');
+  const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
-
-  const login = () => {
-    
-  };
+  const [confirmPassword, setConfirmPassword] = React.useState<string>('');
 
   const create = () => {
-    navigation.navigate('Register');
+    navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bem-vindo</Text>
-      <Input onChangeText={setUser} placeholder="Usuário" />
-      <Input onChangeText={setPassword} placeholder="Senha" secureTextEntry />
+      <Text style={styles.title}>Novo Usúario</Text>
+      <Input onChangeText={setUsername} placeholder="Usuário*" />
+      <Input onChangeText={setEmail} placeholder="Email" />
+      <Input onChangeText={setPassword} placeholder="Senha*" secureTextEntry />
+      <Input onChangeText={setConfirmPassword} placeholder="Confirmar Senha*" secureTextEntry />
 
-      <View style={styles.buttonsRow}>
-        <Button onPress={login} style={styles.login} text='Entrar'/>
-        <Button onPress={create} style={styles.create} text='Novo'/>
-      </View>
+      <Button onPress={create} style={styles.create} text='Criar'/>
     </View>
   );
 };
@@ -69,4 +65,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Login;
+export default Register;
