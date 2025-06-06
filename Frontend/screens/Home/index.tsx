@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Pages} from '../../rotes/Navigation';
+import { useAccessToken } from '../../utils/useAccessToken';
+
 
 
 interface Props{
@@ -10,6 +11,8 @@ interface Props{
 }
 
 const Home: React.FC<Props> = ({navigation}) => {
+
+  const token: string = useAccessToken();
 
   return (
     <View style={styles.container}>
