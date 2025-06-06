@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import {Pages} from '../../rotes/Navigation';
+
+import { getToken } from '../../services/tokenService';
+import { Token } from '../../interfaces/token';
+
+import { showError } from '../../utils/errorMessage';
 
 
 interface Props{
@@ -15,11 +22,30 @@ const Login: React.FC<Props> = ({navigation}) => {
   const [user, setUser] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
 
-  const login = () => {
-    
-  };
+const login = async () => {
+  try {
+    const tokens: Token = await getToken({ username: user, password: password });
+
+    await AsyncStorage.setItem('accessToken', tokens.access);
+    await AsyncStorage.setItem('refreshToken', tokens.refresh);
+
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Home' }],
+    });
+
+  } catch (error: unknown) {
+    console.log(error)
+    if (axios.isAxiosError(error)) {
+      if(error.response?.status === 401 || error.response?.status === 400){
+        showError('Usuário ou senha inválidos.');
+      }
+    }
+  }
+};
 
   const create = () => {
+    console.log("batata")
     navigation.navigate('Register');
   };
 

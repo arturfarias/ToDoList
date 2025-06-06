@@ -6,10 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from '../screens/Login';
 import Register from '../screens/Register';
+import Home from '../screens/Home';
 
 export type Pages = {
   Login: undefined;
   Register: undefined;
+  Home: undefined;
 }
 
 const Stack = createStackNavigator<Pages>();
@@ -36,6 +38,11 @@ const Navigation: React.FC = () => {
                 name='Register' 
                 component={Register}
                 options={{ title: 'Cadastro' }}
+            />
+            <Stack.Screen 
+                name='Home'
+                options={{ headerShown: false }}
+                component={Home}
             />
         </Stack.Navigator>
     </NavigationContainer>
