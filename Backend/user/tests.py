@@ -1,12 +1,12 @@
 from rest_framework.test import APITestCase
 from rest_framework import status
 
-from utils.seeds import run_dataseed
+from utils.seeds import DataSeeder
 
 class UserTest(APITestCase):
 
     def setUp(self):
-        self.admin_user, self.normal_user = run_dataseed(['admin', 'user'])
+        self.admin_user, self.normal_user = DataSeeder().get_users('admin', 'user')
 
     def test_create_user_OK(self):
         response = self.client.post("/user/", {
