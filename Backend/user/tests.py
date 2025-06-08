@@ -1,12 +1,12 @@
-from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
+
+from utils.seeds import run_dataseed
 
 class UserTest(APITestCase):
 
     def setUp(self):
-        self.admin_user = User.objects.create_user(id=1,username='admin', password='adminpass', is_staff=True)
-        self.normal_user = User.objects.create_user(id=2, username='user', password='userpass')
+        self.admin_user, self.normal_user = run_dataseed(['admin', 'user'])
 
     def test_create_user_OK(self):
         response = self.client.post("/user/", {
@@ -214,3 +214,19 @@ class UserTest(APITestCase):
 
         self.assertIn('refresh', response.data)
         self.assertIn('access', response.data)
+
+    def test_me_as_admin_OK(self):
+        self.client.force_authenticate(user=self.admin_user)
+
+        response = self.client.get("/user/me/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.assertEqual(response.json()['username'], 'admin')
+
+    def test_me_as_user_OK(self):
+        self.client.force_authenticate(user=self.normal_user)
+
+        response = self.client.get("/user/me/")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.assertEqual(response.json()['username'], 'user')
