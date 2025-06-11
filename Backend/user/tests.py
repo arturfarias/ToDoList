@@ -85,9 +85,9 @@ class UserTest(APITestCase):
         response = self.client.get("/user/")
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        self.assertEqual(response.json()[0]['username'], 'admin')
-        self.assertEqual(response.json()[1]['username'], 'user')
+        
+        self.assertEqual(response.json()['results'][0]['username'], 'admin')
+        self.assertEqual(response.json()['results'][1]['username'], 'user')
 
 
     def test_get_users_requires_auth(self):
