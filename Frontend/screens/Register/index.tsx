@@ -1,10 +1,15 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import axios from 'axios';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import {Pages} from '../../rotes/Navigation';
+import { createUser } from '../../services/userService';
+import { UserRequest } from '../../interfaces/user';
+
+import { showError, showSucess } from '../../utils/notifications';
 
 interface Props{
   navigation: StackNavigationProp<Pages>
@@ -16,8 +21,27 @@ const Register: React.FC<Props> = ({navigation}) => {
   const [password, setPassword] = React.useState<string>('');
   const [confirmPassword, setConfirmPassword] = React.useState<string>('');
 
-  const create = () => {
-    navigation.goBack();
+  const create = async () => {
+
+    const user:UserRequest = {
+      username: username,
+      email: email,
+      password: password,
+      confirm_password: confirmPassword,
+    };
+    
+    try {
+      await createUser(user);
+      navigation.goBack();
+      showSucess('Usuario criado com sucesso.');
+
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        if(error.response?.status === 400){
+          showError('Dados invalidos.');
+        }
+      }
+    }
   };
 
   return (

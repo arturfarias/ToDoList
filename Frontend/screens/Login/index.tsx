@@ -11,7 +11,7 @@ import {Pages} from '../../rotes/Navigation';
 import { getToken } from '../../services/tokenService';
 import { Token } from '../../interfaces/token';
 
-import { showError } from '../../utils/errorMessage';
+import { showError } from '../../utils/notifications';
 
 
 interface Props{
@@ -35,7 +35,6 @@ const login = async () => {
     });
 
   } catch (error: unknown) {
-    console.log(error)
     if (axios.isAxiosError(error)) {
       if(error.response?.status === 401 || error.response?.status === 400){
         showError('Usuário ou senha inválidos.');
@@ -45,7 +44,6 @@ const login = async () => {
 };
 
   const create = () => {
-    console.log("batata")
     navigation.navigate('Register');
   };
 

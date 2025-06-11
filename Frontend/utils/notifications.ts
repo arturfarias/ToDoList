@@ -8,3 +8,12 @@ export const showError = (message: string) => {
     visibilityTime: 3000,
   });
 };
+
+export const showSucess = (message: string) => {
+  Toast.show({
+    type: 'success',
+    text1: message,
+    position: 'top',
+    visibilityTime: 3000,
+  });
+};
