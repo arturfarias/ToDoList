@@ -6,6 +6,7 @@ class UserResponseSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id','username','email']
+        read_only_fields = ['id']
 
 
 class UserRequestSerializer(serializers.ModelSerializer):
@@ -16,6 +17,7 @@ class UserRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id','username','email', 'password', 'confirm_password']
+        read_only_fields = ['id']
 
     def validate(self, data):
         if data['password'] != data['confirm_password']:
