@@ -38,7 +38,7 @@ class UserTest(APITestCase):
         
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_get_tasks(self):
+    def test_get_tags(self):
         self.client.force_authenticate(user=self.user)
         response = self.client.get("/tag/")
         
