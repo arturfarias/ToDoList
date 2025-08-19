@@ -10,7 +10,7 @@ class TopicSerializer(serializers.ModelSerializer):
     class Meta:
         model = Topic
         fields = ['id', 'description', 'is_done', 'created_at', 'finished_at']
-        read_only_fields = ['id', 'created_at', 'finished_at']
+        read_only_fields = ['id', 'created_at']
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ['id', 'owner', 'title', 'description', 'tags', 'topics', 'created_at', 'finished_at']   
-        read_only_fields = ['id', 'created_at', 'finished_at'] 
+        read_only_fields = ['id', 'created_at'] 
 
     def to_representation(self, instance):
         """Modifica a saída para retornar os objetos de tags"""
