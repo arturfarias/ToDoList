@@ -33,6 +33,9 @@ class DataSeeder:
         Tag.objects.create(id=2,
                            name='black',
                            color='#000000')
+        Tag.objects.create(id=3,
+                           name='yellow',
+                           color='#ffde21')
 
     def _task_seed(self):
         user = User.objects.get(id=1)
