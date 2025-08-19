@@ -46,24 +46,17 @@ class UserTest(APITestCase):
             "owner": self.user.id,
             "title": "update",
             "description": "update",
-            "tags": [
-                {"id": 1, "name": "red", "color": "#FF0000"},
-                {"id": 2, "name": "black", "color": "#000000"},
-            ],
+            "tags": [1,2],
             "topics": [
                 {
-                    "id": 1,
-                    "description": "test task 1",
-                    "is_done": False,
-                    "created_at": "2025-07-23T16:48:10.954461-03:00",
-                    "finished_at": None,
+                    "description": "update 1",
+                    "is_done": True,
+                    "finished_at": True,
                 },
                 {
-                    "id": 2,
-                    "description": "test task 2",
-                    "is_done": False,
-                    "created_at": "2025-07-23T16:48:10.954655-03:00",
-                    "finished_at": None,
+                    "description": "update 2",
+                    "is_done": True,
+                    "finished_at": True,
                 },
             ],
         }
@@ -181,29 +174,4 @@ class UserTest(APITestCase):
         
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    # def test_update_task_with_auth_NOT_FOUND(self):
-    #     self.client.force_authenticate(user=self.normal_user)
-    #     response = self.client.put("/tag/9999/", self.updated_tag)
-        
-    #     self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
-    # def test_update_requires_auth(self):
-    #     response = self.client.put("/tag/{self.normal_user.id}/", self.updated_tag) 
-    #     self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-
-    # def test_delete_task_with_auth(self):
-    #     self.client.force_authenticate(user=self.normal_user)
-    #     response = self.client.delete("/tag/{self.normal_user.id}/")
-        
-    #     self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
-    # def test_delete_task_with_auth_NOT_FOUND(self):
-    #     self.client.force_authenticate(user=self.normal_user)
-    #     response = self.client.delete("/tag/9999/")
-        
-    #     self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    # def test_delete_requires_auth(self):
-    #     response = self.client.delete("/tag/{self.normal_user.id}/")
-
-    #     self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
