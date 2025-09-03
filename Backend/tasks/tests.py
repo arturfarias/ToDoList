@@ -76,6 +76,16 @@ class UserTest(APITestCase):
         self.updated_task_bad_request = copy.deepcopy(self.updated_task)
         self.updated_task_bad_request['tags'].append(99999)
 
+        self.updated_task_more_topics = copy.deepcopy(self.updated_task)
+        self.updated_task_more_topics['topics'].append({
+                                                        "description": "update 3",
+                                                        "is_done": False,
+                                                    },)
+
+        self.updated_task_less_topics = copy.deepcopy(self.updated_task)
+        self.updated_task_less_topics['topics'].pop()
+
+
     def test_get_tasks_requires_auth(self):
         response = self.client.get("/task/")
         
@@ -240,5 +250,46 @@ class UserTest(APITestCase):
         response = self.client.put("/task/1/", self.updated_task_bad_request, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_update_task_with_auth_add_topics(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.put("/task/1/", self.updated_task_more_topics, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['topics'][0]['description'], 'update 1')
+        self.assertEqual(response.json()['topics'][0]['is_done'], True)
+        self.assertEqual(response.json()['topics'][0]['finished_at'], self.date_time.isoformat())
+        self.assertEqual(response.json()['topics'][1]['description'], 'update 2')
+        self.assertEqual(response.json()['topics'][1]['is_done'], True)
+        self.assertEqual(response.json()['topics'][1]['finished_at'], self.date_time.isoformat())
+        self.assertEqual(response.json()['topics'][2]['description'], 'update 3')
+        self.assertEqual(response.json()['topics'][2]['is_done'], False)
+        self.assertEqual(response.json()['topics'][2]['finished_at'], None)
+        self.assertEqual(len(response.json()['topics']), 3)
+
+    def test_update_task_with_auth_remove_topics(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.put("/task/1/", self.updated_task_less_topics, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['topics'][0]['description'], 'update 1')
+        self.assertEqual(response.json()['topics'][0]['is_done'], True)
+        self.assertEqual(response.json()['topics'][0]['finished_at'], self.date_time.isoformat())
+        self.assertEqual(len(response.json()['topics']), 1)
 
 
+    def test_delete_task_with_auth(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.delete("/task/1/")
+        
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_delete_task_with_auth_NOT_FOUND(self):
+        self.client.force_authenticate(user=self.user)
+        response = self.client.delete("/task/9999/")
+        
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_delete_requires_auth(self):
+        response = self.client.delete("/task/1/")
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
