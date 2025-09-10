@@ -1,22 +1,17 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import {PagesStack} from '../../rotes/Navigation';
 import { useAccessToken } from '../../utils/useAccessToken';
 
-
-
 interface Props{
-  navigation: StackNavigationProp<PagesStack>
 }
 
-const Home: React.FC<Props> = ({navigation}) => {
+const Profile: React.FC<Props> = () => {
 
   const token: string = useAccessToken();
 
   return (
     <View style={styles.container}>
-        <Text>Tela de Home muito bonita</Text>
+        <Text>Perfil</Text>
     </View>
   );
 };
@@ -31,4 +26,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Profile;
