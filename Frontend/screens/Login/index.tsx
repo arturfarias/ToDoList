@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import {Pages} from '../../rotes/Navigation';
+import {PagesStack} from '../../rotes/Navigation';
 
 import { getToken } from '../../services/tokenService';
 import { Token } from '../../interfaces/token';
@@ -15,7 +15,7 @@ import { showError } from '../../utils/notifications';
 
 
 interface Props{
-  navigation: StackNavigationProp<Pages>
+  navigation: StackNavigationProp<PagesStack>
 }
 
 const Login: React.FC<Props> = ({navigation}) => {

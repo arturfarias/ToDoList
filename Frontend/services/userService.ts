@@ -15,7 +15,7 @@ export const createUser = async (user: UserRequest): Promise<UserResponse> => {
   return response.data;
 };
 
-export const me = async (token: string): Promise<UserResponse[]> => {
+export const me = async (token: string): Promise<UserResponse> => {
   const response = await api.get('user/me/', {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ export const getUserById = async (token: string, id: number): Promise<UserRespon
 };
 
 export const updateUser = async (token: string, id: number, user: UserRequest): Promise<UserResponse> => {
-  const response = await api.put(`user/${id}/`, {
+  const response = await api.put(`user/${id}/`, user, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -43,7 +43,7 @@ export const updateUser = async (token: string, id: number, user: UserRequest): 
 };
 
 export const updateParcialUser = async (token: string, id: number, user: UserRequest): Promise<UserResponse> => {
-  const response = await api.patch(`user/${id}/`, {
+  const response = await api.patch(`user/${id}/`, user, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
