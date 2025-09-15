@@ -5,14 +5,14 @@ import axios from 'axios';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import {Pages} from '../../rotes/Navigation';
+import {PagesStack} from '../../rotes/Navigation';
 import { createUser } from '../../services/userService';
 import { UserRequest } from '../../interfaces/user';
 
 import { showError, showSucess } from '../../utils/notifications';
 
 interface Props{
-  navigation: StackNavigationProp<Pages>
+  navigation: StackNavigationProp<PagesStack>
 }
 
 const Register: React.FC<Props> = ({navigation}) => {
@@ -51,7 +51,6 @@ const Register: React.FC<Props> = ({navigation}) => {
       <Input onChangeText={setEmail} placeholder="Email" />
       <Input onChangeText={setPassword} placeholder="Senha*" secureTextEntry />
       <Input onChangeText={setConfirmPassword} placeholder="Confirmar Senha*" secureTextEntry />
-
       <Button onPress={create} style={styles.create} text='Criar'/>
     </View>
   );
