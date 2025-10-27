@@ -30,7 +30,6 @@ jobs:
         pipx install poetry
 
     - name: Install dependencies with Poetry
-      working-directory: Backend
       run: |
         poetry install
 
